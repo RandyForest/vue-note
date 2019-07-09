@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue-v-tesxt</title>
+    <script src="./lib/vue.js"></script>
+</head>
+
+<!-- 
+    v-html 用于解析 html 格式文本
+-->
+<body>
+    <div id="app">
+        <p v-html="msg"></p>
+    </div>
+
+    <script>
+
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                msg: '<h1>你好<h1>'
+            }
+        })
+    </script>
+</body>
+
+</html>
