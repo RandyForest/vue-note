@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue-事件</title>
+    <script src="./lib/vue.js"></script>
+    <style>
+        .parent {
+            height: 100px;
+            background-color: red;
+            display: flex;
+            justify-content: center;
+        }
+
+        .child {
+            height: 50;
+        }
+    </style>
+
+</head>
+
+<!-- 
+    
+-->
+
+<body>
+
+    <div id="app">
+        <!-- stop -->
+        <div class="parent" @click="parentShow">
+            <!-- 会产生气泡弹出 -->
+            <button class="child" @click="childShow">按钮</button>
+
+            <!-- 阻止气泡弹出 -->
+            <button class="child" @click:stop="childShow">按钮</button>
+        </div>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            methods: {
+                parentShow: function () {
+                    console.log("Parent")
+                },
+                childShow: function () {
+                    console.log("Child")
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

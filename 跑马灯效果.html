@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue-v-tesxt</title>
+    <script src="./lib/vue.js"></script>
+</head>
+
+<!-- 
+    跑马灯效果
+-->
+
+<body>
+    <div id="app">
+        <button @click="start">开始</button>
+        <button @click="stop">结束</button>
+        <p v-text="msg"></p>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                msg: "这是一串演示文字！",
+                intervalId: null
+            },
+            methods: {
+                startToEnd: function () {
+                    var start = this.msg.substring(0, 1);
+                    var end = this.msg.substring(1);
+                    this.msg = end + start;
+
+                },
+                start: function () {
+                    if (this.intervalId != null) {
+                        return;
+                    }
+                    interval = 500;
+                    this.intervalId = setInterval(() => {
+                        this.startToEnd();
+                    }, interval);
+                },
+                stop: function () {
+                    clearInterval(this.intervalId);
+                    this.intervalId = null;
+                }
+            }
+        })
+    </script>
+
+</body>
+
+</html>

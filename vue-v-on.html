@@ -10,23 +10,29 @@
 </head>
 
 <!-- 
-    v-text 属性用于显示data值，但不会在客户端显示插值表达式
-    v-test 会覆盖元素中的内容
+    v-on 用于绑定事件
 -->
+
 <body>
     <div id="app">
-        <p v-text="msg"></p>
+        <button v-on:click="show">按钮</button>
+
+        <!-- v-on 可以简写成艾特号 @ -->
+        <button @click="show">按钮</button>
     </div>
 
     <script>
-
         var vm = new Vue({
             el: '#app',
-            data: {
-                msg: '你好'
+            // methods 用于定义方法
+            methods:{
+                show:function(){
+                    alert('Hello')
+                }
             }
         })
     </script>
+
 </body>
 
 </html>
