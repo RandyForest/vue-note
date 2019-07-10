@@ -5,8 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>vue-v-tesxt</title>
+    <title>vue-v-on</title>
     <script src="./lib/vue.js"></script>
+    <style>
+        .div1 {
+            height: 200px;
+            width: 200px;
+            background-color: red;
+        }
+    </style>
 </head>
 
 <!-- 
@@ -19,15 +26,27 @@
 
         <!-- v-on 可以简写成艾特号 @ -->
         <button @click="show">按钮</button>
+
+        <!-- 绑定多个事件的格式 -->
+        <div class="div1" v-on="{mouseenter:onEnter,mouseleave:onOut}">{{msg}}</div>
     </div>
 
     <script>
         var vm = new Vue({
             el: '#app',
+            data: {
+                msg: "null"
+            },
             // methods 用于定义方法
-            methods:{
-                show:function(){
-                    alert('Hello')
+            methods: {
+                show: function () {
+                    alert('Hello');
+                },
+                onEnter: function () {
+                    this.msg = "onEnter";
+                },
+                onOut: function () {
+                    this.msg = "onOut";
                 }
             }
         })

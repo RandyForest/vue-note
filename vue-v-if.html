@@ -5,26 +5,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>vue-v-text</title>
+    <title>vue-v-if</title>
     <script src="./lib/vue.js"></script>
+    <style>
+        .parent {
+            height: 100px;
+            background-color: red;
+            display: flex;
+            justify-content: center;
+        }
+
+        .child {
+            height: 50;
+        }
+    </style>
+
 </head>
 
 <!-- 
-    v-text 属性用于显示data值，但不会在客户端显示插值表达式
-    v-test 会覆盖元素中的内容
+    控制是否显示元素
 -->
 
 <body>
+
     <div id="app">
-        <p v-text="msg"></p>
-        <p v-text="msg">这串文本会被覆盖</p>
+    <p v-if="display">显示</p>
+    <p v-if="hide">隐藏</p>
     </div>
 
     <script>
         var vm = new Vue({
             el: '#app',
             data:{
-                msg: "<h1>Hello</h1>"
+                display:true,
+                hide:false
             }
         })
     </script>
