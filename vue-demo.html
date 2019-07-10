@@ -16,7 +16,7 @@
         表达式可以是任意js语句
     -->
     <div>
-        <p id=content>{{msg}}</p>
+        <p id="content">{{msg}}</p>
     </div>
 
     <script>
@@ -33,7 +33,7 @@
         不能解析标签
     -->
     <div>
-        <p id=content2>{{msg2}}</p>
+        <p id="content2">{{msg2}}</p>
     </div>
 
     <script>
@@ -48,13 +48,22 @@
     <!-- 
         test3
         id相同不解析
+        el相同不覆盖
     -->
     <div>
-        <p id=content>{{msg}}</p>
+        <p id="content3">{{msg}}</p>
+        <p id="content3">{{msg}}</p>
     </div>
 
     <script>
-        var vm = new Vue({
+        var vm2 = new Vue({
+            el: '#content',
+            data: {
+                msg: 'test3'
+            }
+        })
+
+        var vm3 = new Vue({
             el: '#content3',
             data: {
                 msg: 'test3'

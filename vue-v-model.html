@@ -34,25 +34,22 @@
 
     <!-- 
         test2
-        指令引用多个值时用加号+ 连接
+        指令引用多个值时用加号 + 连接
     -->
     <div id="app2">
-        <input v-model="msg2" @onchange="fun1"></input>
-        <p v-text="msg1+msg2"></p>
+        <input v-model="msg2" @change="fun1"></input>
     </div>
 
     <script>
         var vm = new Vue({
             el: '#app2',
             data: {
-                msg1: "msg2的值：",
                 msg2: "Hello"
             },
             methods: {
                 fun1: function () {
-                    alert("aaa")
                     var info = document.createElement("p");
-                    info.textContent = this.msg1;
+                    info.textContent = "msg的值为："+this.msg2;
                     document.getElementById("app2").appendChild(info);
                 }
             },
