@@ -13,6 +13,18 @@
             width: 200px;
             background-color: red;
         }
+
+        #divA{
+            height: 100px;
+            width: 100px;
+            border-style: solid;
+        }
+
+        #divB{
+            height: 100px;
+            width: 100px;
+            border-style: solid;
+        }
     </style>
 </head>
 
@@ -27,15 +39,24 @@
         <!-- v-on 可以简写成艾特号 @ -->
         <button @click="show">按钮</button>
 
+        <hr>
+
         <!-- 绑定多个事件的格式 -->
         <div class="div1" v-on="{mouseenter:onEnter,mouseleave:onOut}">{{msg}}</div>
+
+        <hr>
+
+        <!-- 一个事件绑定多个方法 -->
+        <button @click="fun1();fun2();">上色</button>
+        <div id="divA"></div>
+        <div id="divB"></div>
     </div>
 
     <script>
         var vm = new Vue({
             el: '#app',
             data: {
-                msg: "null"
+                msg: "移动鼠标到框内"
             },
             // methods 用于定义方法
             methods: {
@@ -47,6 +68,12 @@
                 },
                 onOut: function () {
                     this.msg = "onOut";
+                },
+                fun1:function(){
+                    document.getElementById("divA").style.backgroundColor="yellow";
+                },
+                fun2:function(){
+                    document.getElementById("divB").style.backgroundColor="green";
                 }
             }
         })

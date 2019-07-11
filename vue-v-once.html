@@ -5,33 +5,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>vm-$watch</title>
+    <title>vue-v-once</title>
     <script src="./lib/vue.js"></script>
 </head>
 
 <!-- 
-    watch(newValue,oldValue) 是Vue对象中的方法
-    当被观察的对象发生改变时，就会调用watch函数
+    v-once 用于一次性创建文本
+    被引用的变量不会被更改
 -->
 
 <body>
+
     <div id="app">
-        <input type="text" v-model="msg"></input>
+        <p>{{msg}}</p>
+        <p v-once>{{msg}}</p>
+        <button @click="click()">按钮</button>
     </div>
 
     <script>
         var vm = new Vue({
             el: '#app',
             data: {
-                msg: 'Hello'
-            }
-        })
-
-        vm.$watch("msg", function (newValue, oldValue) {
-            console.log("oldValue: " + oldValue + ", " + "newValue: " + newValue);
+                msg: "加入 v-once 不会被更改"
+            },
+            methods: {
+                click() {
+                    this.msg = "没有加入 v-once 被更改";
+                }
+            },
         })
     </script>
-
 </body>
 
 </html>
