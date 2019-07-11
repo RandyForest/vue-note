@@ -14,7 +14,14 @@
 -->
 
 <body>
-    <!-- 侦听属性 -->
+    <!-- 
+        侦听属性
+        在 watch 中定义了监听 firstName 与 lastName 的方法，方法名与变量一样
+        只要这两个变量的值被改变就会被执行
+        例如执行：  firstName="aaa";
+        就会调用：  firstName("aaa");
+        在 firstName 中函数的语句就会被执行
+    -->
     <div id="demo">
         <input type="text" v-model="fullName">
         <p>{{ fullName }}</p>
@@ -46,7 +53,11 @@
 
     <hr>
 
-    <!-- 计算属性 -->
+    <!-- 
+        计算属性
+        在 computed 中定义了计算设置 fullName 的方法
+        
+    -->
     <div id="demo2">
         <input type="text" v-model="fullName">
         <p>{{ fullName }}</p>
