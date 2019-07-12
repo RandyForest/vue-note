@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue-v-text</title>
+    <script src="./lib/vue.js"></script>
+</head>
+
+<!-- 
+    在操作变量时会触发vue的监听
+    
+-->
+
+<body>
+    <!--
+        数组更变检测
+        被监听的方法：
+            push()
+            pop()
+            shift()
+            unshift()
+            splice()
+            sort()
+            reverse()
+            filter()
+            concat() 
+            slice()
+        这些操作不能被检测：
+            1. 利用索引直接设置一个数组项时
+                vm.items[indexOfItem] = newValue
+            解决方法：
+                Vue.set(vm.items, indexOfItem, newValue)
+
+            2. 修改数组的长度时
+                vm.items.length = newLength
+            解决方法：
+                vm.items.splice(newLength)
+
+    -->
+    <div id="app">
+        <!-- 只有第二个按钮调用的方法能启动检测 -->
+        <input id="inBox" type="text" placeholder="输入数组长度">
+        <button @click="update1">更改</button>
+        <button @click="update2">更改</button>
+        <button @click="flash">刷新</button>
+        <p id="listLengthPar" v-text="listLengthPar"></p>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                inBox: null,
+                list: [],
+                text: "数组长度为："
+            },
+            // 定义两个更改数组长度的方法
+            methods: {
+                update1() {
+                    var length = document.getElementById("inBox").value;
+                    this.list.length = length;
+                    console.log(this.list);
+                },
+                update2() {
+                    var length = document.getElementById("inBox").value;
+                    this.list.splice(length);
+                    console.log(this.list);
+                },
+                flash() {
+                    document.getElementById("listLengthPar").textContent = this.text + this.list.length;
+                }
+            },
+            watch: {
+                list: function () {
+                    console.log("$watch： Changes detected.");
+                },
+            },
+            computed: {
+                listLengthPar: function () {
+                    return this.text + this.list.length;
+                },
+            },
+            updated() {
+                console.log("updated(): Changes detected.");
+            },
+        })
+    </script>
+
+    <hr>
+
+    <!--
+        更改对象
+        不能检测对象属性的添加或删除
+        例如给 obj 增加一个对象
+            vm.obj.b=num;
+        解决方法：
+            Vue.set(vm.items, indexOfItem, newValue);
+            
+    -->
+    <div id="app2">
+        <!-- 先点第二个按钮就能启动启动检测 -->
+        <input id="inBox2" type="text" placeholder="添加值">
+        <button @click="update1">更改</button>
+        <button @click="update2">更改</button>
+        <!-- <button @click="flash">刷新</button> -->
+        <li v-for="(value,filed) of obj">{{filed}}: {{value}}</li>
+    </div>
+
+    <script>
+        var vm2 = new Vue({
+            el: '#app2',
+            data: {
+                inBox2: null,
+                obj: {a:1},
+                text: "对象属性有："
+            },
+            // 定义两个更改对象变量的方法
+            methods: {
+                update1() {
+                    var num = document.getElementById("inBox2").value;
+                    this.obj.b=num;
+                    console.log(this.obj);
+                },
+                update2() {
+                    var num = document.getElementById("inBox2").value;
+                    Vue.set(this.obj, "b", num);
+                    console.log(this.obj);
+                },
+                // flash() {
+                //     for (const key in this.obj) {
+                //         if (this.obj.hasOwnProperty(key)) {
+                //             const value = this.obj[key];
+                //             console.log(key+": "+value);
+                //         }
+                //     }
+                // }
+            },
+            watch: {
+                obj: function () {
+                    console.log("$watch： Changes detected.");
+                },
+            },
+            updated() {
+                console.log("updated(): Changes detected.");
+            },
+        })
+    </script>
+</body>
+
+</html>

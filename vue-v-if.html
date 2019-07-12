@@ -10,22 +10,68 @@
 </head>
 
 <!-- 
+    v-if
     控制是否显示元素
 -->
 
 <body>
 
+    <!-- 基础使用 -->
     <div id="app">
-    <p v-if="display">该文本被显示</p>
-    <p v-if="hide">该文本被隐藏</p>
+        <p v-if="display">该文本被显示</p>
+        <p v-if="hide">该文本被隐藏</p>
     </div>
 
     <script>
         var vm = new Vue({
             el: '#app',
-            data:{
-                display:true,
-                hide:false
+            data: {
+                display: true,
+                hide: false
+            }
+        })
+    </script>
+
+    <hr>
+
+    <!--
+        if-else
+        v-else 标签必须紧跟在 v-if 标签后，否则它将不会被识别。
+        
+        if-else-if
+        v-else-if 标签的用法与 v-else 类似
+    -->
+    <div id="app2">
+        <p v-if="display">该文本被显示</p>
+        <p v-else>该文本被隐藏</p>
+    </div>
+
+    <script>
+        var vm2 = new Vue({
+            el: '#app2',
+            data: {
+                display: true,
+            }
+        })
+    </script>
+
+    <!--
+        v-if 只能定义在元素上，有些时候并不需要元素的包裹
+        这时候可以使用 <template> 元素，此元素不会显示在最终渲染结果上
+    -->
+    <div id="app3">
+        <template v-if="display">
+            <p>此元素的父元素&lt;template&gt;</p>
+            <p>不会显示在最终渲染结果上</p>
+            <p>父元素依然是&lt;div&nbsp;id="app3"&gt;</p>
+        </template>
+    </div>
+
+    <script>
+        var vm3 = new Vue({
+            el: '#app3',
+            data: {
+                display: true,
             }
         })
     </script>

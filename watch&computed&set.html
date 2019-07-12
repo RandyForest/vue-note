@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>vue-v-text</title>
+    <title>watch&computed&set</title>
     <script src="./lib/vue.js"></script>
 </head>
 
@@ -42,10 +42,10 @@
             },
             watch: {
                 firstName: function (val) {
-                    this.fullName = val + ' ' + this.lastName
+                    this.fullName = val + ' ' + this.lastName;
                 },
                 lastName: function (val) {
-                    this.fullName = this.firstName + ' ' + val
+                    this.fullName = this.firstName + ' ' + val;
                 }
             }
         })
@@ -77,7 +77,8 @@
             },
             computed: {
                 fullName: function () {
-                    return this.firstName + ' ' + this.lastName
+                    // return this.firstName + ' ' + this.lastName;
+                    return "aaaaa";
                 }
             }
         })
@@ -90,7 +91,7 @@
         当更改 fullName 时，会执行 set 方法
         如执行：    vm.fullName="aaa bbb";
         会调用：    set("aaa bbb");
-        获取值时会调用
+        获取值时会调用get方法
     -->
     <div id="demo3">
         <input type="text" v-model="fullName">
@@ -112,13 +113,13 @@
                 fullName: {
                     // getter
                     get: function () {
-                        return this.firstName + ' ' + this.lastName
+                        return this.firstName + ' ' + this.lastName;
                     },
                     // setter
                     set: function (newValue) {
-                        var names = newValue.split(' ')
-                        this.firstName = names[0]
-                        this.lastName = names[names.length - 1]
+                        var names = newValue.split(' ');
+                        this.firstName = names[0];
+                        this.lastName = names[names.length - 1];
                     }
                 }
             }

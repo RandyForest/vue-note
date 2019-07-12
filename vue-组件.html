@@ -35,19 +35,40 @@
         自定义属性
     -->
     <div id="app2">
-        <title-template2 :myattr="item"></title-template2>
+        <li-template2 myattr="这是一句话"></li-template2>
     </div>
 
     <script>
-        Vue.component('title-template2', {
+        Vue.component('li-template2', {
             props: ['myattr'],
             template: '<li>{{myattr}}</li>'
         });
 
-        var vm = new Vue({
-            el: "#app2",
+        var vm2 = new Vue({
+            el: "#app2"
+        })
+    </script>
+
+    <hr>
+
+    <!-- 
+        test3
+        自定义属性（扩展用法）
+    -->
+    <div id="app3">
+        <li-template2 :myattr="item"></li-template2>
+    </div>
+
+    <script>
+        Vue.component('li-template2', {
+            props: ['myattr'],
+            template: '<li>{{myattr}}</li>'
+        });
+
+        var vm3 = new Vue({
+            el: "#app3",
             data: {
-                item: "这是一句话"
+                item: "这是另一句话"
             },
         })
     </script>

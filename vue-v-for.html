@@ -11,20 +11,25 @@
 
 <!-- 
     遍历数组
+    语法：
+        <tag v-for="value of list">{{value}}</tag>
+    或
+        <tag v-for="value in list">{{value}}</tag>
+    value：数组 list 选项中的值
 -->
 
 <body>
     <!-- test1 -->
     <div id="app">
         <!-- 从list数组中依次取出元素赋值给变量i -->
-        <p v-for="i in list">{{i}}</p>
+        <li v-for="i of list">{{i}}</li>
     </div>
 
     <script>
         var vm = new Vue({
             el: '#app',
             data: {
-                list: ["一", "二", "三", "四", "五", "六", "七",]
+                list: ["一", "二", "三", "四", "五", "六", "七"]
             }
         })
     </script>
@@ -35,14 +40,14 @@
     <div id="app2">
         <input type="text" v-model="value"></input>
         <button @click="addElement">添加元素</button>
-        <p v-for="i in list" v-text="i"></p>
+        <li v-for="i of list" v-text="i"></li>
     </div>
 
     <script>
-        var vm = new Vue({
+        var vm2 = new Vue({
             el: '#app2',
             data: {
-                list: ["一", "二", "三", "四", "五", "六", "七"],
+                list: ["一", "二", "三"],
                 value: null
             },
             methods: {
@@ -52,6 +57,35 @@
             }
         })
     </script>
+
+    <hr>
+
+    <!-- test3 -->
+    <div id="app3">
+        <!-- 当传入两个个参数时，分别表示 值,键，数组的键名是索引号 -->
+        <li v-for="(i,index) of list">第 {{index}} 项是 {{i}}</li>
+        <hr>
+        <li v-for="(value,key) of objs">{{key}}: {{value}}</li>
+        <hr>
+        <!-- 当传入三个参数时，分别表示 值,键,索引 -->
+        <li v-for="(value,key,index) of objs">{{index}}-{{key}}: {{value}}</li>
+
+    </div>
+
+    <script>
+        var vm3 = new Vue({
+            el: '#app3',
+            data: {
+                list: ["一", "二", "三"],
+                objs: {
+                    id: 11,
+                    name: "aaa",
+                    pass: "bbb"
+                }
+            }
+        })
+    </script>
+
 </body>
 
 </html>

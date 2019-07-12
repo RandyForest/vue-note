@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue-v-show</title>
+    <script src="./lib/vue.js"></script>
+</head>
+
+<!-- 
+    v-show
+    控制是否显示元素
+    用法与 v-if 相似
+    实现是改变 css 的 dispaly 属性
+    v-show 不支持 <template> 元素，也不支持 v-else。
+-->
+
+<body>
+
+    <!-- 基础使用 -->
+    <div id="app">
+        <p v-show="display">该文本被显示</p>
+        <p v-show="hide">该文本被隐藏</p>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                display: true,
+                hide: false
+            }
+        })
+    </script>
+
+</body>
+
+</html>

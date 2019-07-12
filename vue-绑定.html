@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue-$class</title>
+    <script src="./lib/vue.js"></script>
+    <style>
+        .value {
+            background-color: red;
+        }
+    </style>
+</head>
+
+<!--
+    此类语法可以绑定 class 与 style 属性
+-->
+<body>
+    <!--
+        test1
+        对象语法
+        控制是否显示class的值
+    -->
+    <div id="app">
+        <div v-bind:class="{ 'value': display}">div1</div>
+        <div v-bind:class="{ 'value': hide }">div2</div>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                display: true,
+                hide: false
+            }
+        })
+    </script>
+
+    <hr>
+
+    <!--
+        test2
+        在不同地方定义
+    -->
+    <div id="app2">
+        <!-- 定义多个 class -->
+        <div v-bind:class="[value1,value2]">div1</div>
+
+        <!-- 定义在 data 内 -->
+        <div v-bind:class="classObjInData">div2</div>
+
+        <!-- 定义在 computed 内 -->
+        <div v-bind:class="classObjInComputed">div3</div>
+    </div>
+
+    <script>
+        var vm2 = new Vue({
+            el: "#app2",
+            data: {
+                value1: "value",
+                value2: null,
+                classObjInData: {
+                    'value': true
+                }
+            },
+            computed: {
+                classObjInComputed: function () {
+                    var isDisplay = (Math.random() * 2) > 1 ? true : false;
+                    return {
+                        'value': isDisplay
+                    };
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
