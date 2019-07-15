@@ -37,24 +37,73 @@
         指令引用多个值时用加号 + 连接
     -->
     <div id="app2">
-        <input v-model="msg2" @change="fun1"></input>
+        <input v-model="msg" @change="fun1"></input>
     </div>
 
     <script>
-        var vm = new Vue({
+        var vm2 = new Vue({
             el: '#app2',
             data: {
-                msg2: "Hello"
+                msg: "Hello"
             },
             methods: {
                 fun1: function () {
                     var info = document.createElement("p");
-                    info.textContent = "msg的值为："+this.msg2;
+                    info.textContent = "msg的值为：" + this.msg;
                     document.getElementById("app2").appendChild(info);
                 }
             },
         })
     </script>
+
+    <hr>
+
+    <!--
+        test3
+        v-model.lazy
+        默认v-model是在input事件触发时同步
+        .lazy可以触发事件改变成change
+        效果与text2相似，只不过没有创建新元素
+    -->
+    <div id="app3">
+        <input v-model.lazy="msg"></input>
+        <p v-text="msg"></p>
+    </div>
+
+    <script>
+        var vm3 = new Vue({
+            el: '#app3',
+            data: {
+                msg: "Hello"
+            }
+        })
+    </script>
+
+    <hr>
+
+    <!--
+    test4
+    v-model.number 将输入框内容转换成数值
+    -->
+    <div id="app4">
+        <input v-model.number="msg" type="number"></input>
+        <p v-text="msg"></p>
+    </div>
+
+    <script>
+        var vm4 = new Vue({
+            el: '#app4',
+            data: {
+                msg: "0"
+            }
+        })
+    </script>
+
+    <!--
+        v-model.trim 过滤首尾空白符
+    -->
+
+
 </body>
 
 </html>

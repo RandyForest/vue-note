@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue-表单输入</title>
+    <script src="./lib/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <input type="checkbox" id="checkbox" v-model="checked">
+        <label for="checkbox">{{ checked }}</label>
+    </div>
+
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                checked: ""
+            }
+        })
+    </script>
+
+    <hr>
+
+    <div id='app2'>
+        <input type="checkbox" value="jack_value" v-model="checkedValues">
+        <label for="jack">Jack</label>
+        <input type="checkbox" value="john_value" v-model="checkedValues">
+        <label for="john">John</label>
+        <input type="checkbox" value="mike_value" v-model="checkedValues">
+        <label for="mike">Mike</label>
+        <br>
+        <span>Checked names: {{ checkedValues }}</span>
+    </div>
+
+    <script>
+        new Vue({
+            el: "#app2",
+            data: {
+                checkedValues: []
+            }
+        })
+    </script>
+
+
+    <div id="app3">
+        <select v-model="selected">
+            <option disabled value="">请选择</option>
+            <option value="1">一</option>
+            <option value="2">二</option>
+            <option value="3">三</option>
+        </select>
+        <span>Selected: {{ selected }}</span>
+    </div>
+
+    <script>
+        new Vue({
+            el: "#app3",
+            data: {
+                selected: ''
+            }
+        })
+    </script>
+</body>
+
+</html>
