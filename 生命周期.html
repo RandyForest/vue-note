@@ -15,40 +15,52 @@
 <body>
     <div id="app">
         <button @click="updateValue()">创建</button>
+        <button @click="destroyValue()">销毁</button>
         <input type="text" v-model="msg">
     </div>
     <script>
         var vm = new Vue({
             el: '#app',
             data: {
-                msg: null
+                msg: "hello"
             },
             methods: {
                 updateValue: function () {
                     this.msg = "文本内容被更改";
+                },
+                destroyValue:function(){
+                    this.$destroy();
                 }
             },
+            // 在对象创建之前
             beforeCreate: function () {
                 console.log("beforeCreate: " + this.msg);
             },
+            // 在对象创建之之后
             created: function () {
                 console.log("Created: " + this.msg);
             },
+            // 数据已经生成，但没有挂载到页面
             beforeMount: function () {
                 console.log("beforeMount: " + this.msg);
             },
+            // 已经挂载到页面
             mounted: function () {
                 console.log("mounted: " + this.msg);
             },
+            // 数据更改之前
             beforeUpdate: function () {
                 console.log("beforeUpdate: " + this.msg);
             },
+            // 数据更改之后
             updated: function () {
                 console.log("updated: " + this.msg);
             },
+            // 数据销毁前
             beforeDestroy: function () {
                 console.log("beforeDestroy: " + this.msg);
             },
+            // 数据销毁后
             destroyed: function () {
                 console.log("destroyed: " + this.msg);
             }

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
+</head>
+
+<body>
+    <!--
+        vue-resource 依赖 vue
+        在 Vue 对象中加入了 $http
+    -->
+    <div id="app">
+        <button @click="getInfo">GET</button>
+        <button @click="getInfo2">GET</button>
+    </div>
+
+    <!--
+        语法：   Vm.http.请求方法(请求内容)
+                上句获得的对象.then(成功后的方法,失败后的方法)
+    -->
+
+    <script>
+        // Vue.http.interceptors.push(function (request) {
+        //     console.log("aaa");
+        //     request.method = 'GET';
+
+        //     // modify headers
+        //     request.headers.set('Access-Control-Allow-Origin', 'https://www.baidu.com/');
+
+        //     console.log(request);
+        //     return function (response) {
+        //         console.log(response);
+        //     }
+        // })
+
+        var request = {
+            url: 'http://www.baidu.com/',
+            body: {},
+            headers: {
+                'Access-Control-Allow-Origin': 'http://www.baidu.com/'
+            },
+            method: {},
+            params: {},
+            timeout: {},
+            credentials: {},
+            emulateHTTP: {},
+            emulateJSON: {},
+            before: function (Request) { },
+            progress: function (Event) { }
+        }
+        new Vue({
+            el: '#app',
+            methods: {
+                getInfo() {
+                    // 语法：   this.$http.请求方法(请求内容)
+                    //          上句获得的对象.then(成功后的方法,失败后的方法)
+                    this.$http.get('http://www.baidu.com/').then((response) => {
+                        console.log(response);
+                    }, (response) => { // 失败后执行
+                        console.log(response);
+                    });
+                },
+                getInfo2() {
+                    this.$http.get('http://www.baidu.com/', request).then((response) => {
+                        console.log(response);
+                    }, (response) => {
+                        console.log(response);
+                    })
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>
