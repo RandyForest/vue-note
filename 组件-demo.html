@@ -38,13 +38,13 @@
                         <td></td>\
                     </tr >\
                 </table >\
-            '
+        '
         })
     </script>
 
     <!-- 用例 -->
     <div id="app">
-        <table-r :border="1" :col="3" :has-th="true"></table-r>
+        <table-r :border="1" :col="3" :has-th="true">aaaa</table-r>
     </div>
     <script>
         new Vue({
@@ -52,61 +52,6 @@
         })
     </script>
 
-    <hr>
-
-    <style>
-        .fade-enter-active,
-        .fade-leave-active {
-            transition: opacity .5s;
-        }
-
-        .fade-enter,
-        .fade-leave-to
-
-        /* .fade-leave-active below version 2.1.8 */
-            {
-            opacity: 0;
-        }
-    </style>
-
-    <div id="demo">
-        <button v-on:click="show = !show">
-            Toggle
-        </button>
-        <transition name="fade">
-            <p v-if="show">hello</p>
-        </transition>
-    </div>
-
-    <script>
-        new Vue({
-            el: '#demo',
-            data: {
-                show: true
-            }
-        })
-    </script>
-
-    <hr>
-
-    <div id="app3">
-        <input type="text" v-focus>
-    </div>
-
-    <script>
-        // 注册一个全局自定义指令 `v-focus`
-        Vue.directive('focus', {
-            // 当被绑定的元素插入到 DOM 中时……
-            inserted: function (el) {
-                // 聚焦元素
-                el.focus()
-            }
-        })
-
-        new Vue({
-            el: "#app3"
-        })
-        
-    </script>
+</body>
 
 </html>

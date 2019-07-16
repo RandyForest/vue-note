@@ -15,10 +15,18 @@
         自定义标签与模板
     -->
     <div id="app">
+        <!-- 使用组件时使用烤串命名 -->
         <title-template></title-template>
     </div>
 
+    <!-- 组件要定义在 Vue 对象之前 -->
     <script>
+        // 全局定义
+        // 格式：   Vue.component("组件名", {组件内容})
+        // 组件名用烤串命名
+        // 字段：
+        //     template 定义模板
+        //     props    定义属性，定义用小驼峰，使用用烤串
         Vue.component('title-template', {
             template: '<h1>模板标题</h1>'
         });
@@ -33,19 +41,28 @@
     <!-- 
         test2
         自定义属性
+        定义用小驼峰，使用用烤串
     -->
     <div id="app2">
-        <li-template2 myattr="这是一句话"></li-template2>
+        <li-template2 my-attr="这是一句话"></li-template2>
     </div>
 
     <script>
-        Vue.component('li-template2', {
-            props: ['myattr'],
-            template: '<li>{{myattr}}</li>'
-        });
+        // 全局定义
+        // Vue.component('li-template2', {
+        //     props: ['myattr'],
+        //     template: '<li>{{myattr}}</li>'
+        // });
 
         var vm2 = new Vue({
-            el: "#app2"
+            el: "#app2",
+            // 局部定义
+            components: {
+                'li-template2': {
+                    props: ['myAttr'],
+                    template: '<li>{{myAttr}}</li>'
+                }
+            }
         })
     </script>
 
@@ -130,6 +147,27 @@
             }
         })
     </script>
+
+    <hr>
+
+    <!-- slot 插槽 -->
+    <div id="app5">
+        <!-- 如果不适用插槽，标签中的内容不会显示 -->
+        <p-template>#这是html中的文本#</p-template>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: "#app5",
+            components:{
+                'p-template':{
+                    // <slot> 放于希望在html中插入的位置
+                    template:`<p>#这是模板定义中的文本#<slot></slot></p>`
+                }
+            }
+        })
+    </script>
+
 </body>
 
 </html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>$filter-过滤器</title>
+    <script src="./lib/vue.js"></script>
+</head>
+
+<!--
+    使用： {{ 变量 | 过滤器 }}
+    或     <标签 v-bind:属性="变量 | 过滤器">
+-->
+
+<body>
+    <div id="app">
+        <!-- 把变量 msg 通过管道符 | 传入过滤器 -->
+        <p>{{msg|filter1}}</p>
+        <p>{{msg|filter2}}</p>
+        <p v-text="msg|filter1"></p>
+    </div>
+
+    <script>
+        // 全局定义
+        // Vue.filter("过滤器名", 过滤器方法)
+        // value 就是使用时传入的变量，此时是 msg
+        Vue.filter("filter1", function (value) {
+            return "filter1: " + value;
+        })
+
+
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                msg: "Hello"
+            },
+            // 局部定义
+            filters: {
+                filter2: function (value) {
+                    return "filter2: " + value;
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

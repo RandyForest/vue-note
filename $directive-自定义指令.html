@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>自定义指令</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+
+<!--  -->
+<body>
+
+    <div id="app">
+        <!--
+            使用：  <标签 自定义指令>
+            在使用时指令名要加 v- 前缀
+        -->
+        <p v-bg-red>背景色是红色</p>
+        <p v-bg-blue>背景色是蓝色</p>
+    </div>
+
+    <script>
+        // 全局定义
+        Vue.directive("bgBlue", {
+            inserted: function (el) {
+                el.style.backgroundColor = "blue"
+            }
+        })
+    </script>
+
+    <script>
+        new Vue({
+            el: "#app",
+            // 局部定义
+            directives: {
+                // 指令名，小驼峰
+                bgRed: {
+                    // 生命周期
+                    inserted: function (el) {
+                        el.style.backgroundColor = "red"
+                    }
+                }
+            }
+        });
+    </script>
+
+</body>
+
+</html>
