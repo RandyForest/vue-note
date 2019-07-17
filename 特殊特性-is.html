@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>特殊特性-is</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+
+<body>
+    <div id="app">
+        <button @click="changeTargetFlag">切换</button>
+        <!--
+            当 componentId 的值为 "my-tag1" 时显示组件 my-tag1 
+            当 componentId 的值为 "my-tag2" 时显示组件 my-tag2
+        -->
+        <component :is="componentId"></component>
+    </div>
+
+    <script>
+        new Vue({
+            el: "#app",
+            data() {
+                return {
+                    targetFlag: "1",
+                }
+            },
+            // 定义两个组件
+            components: {
+                'my-tag1': {
+                    template: `<p>My tag1</p>`
+                },
+                'my-tag2': {
+                    template: `<p>My tag2</p>`
+                },
+            },
+            methods: {
+                // 改变 targetFlag 标志
+                changeTargetFlag: function () {
+                    this.targetFlag = this.targetFlag == 1 ? 2 : 1;
+                }
+            },
+            computed: {
+                // 计算出此时的组件ID
+                componentId: function () {
+                    return componentId = "my-tag" + this.targetFlag;
+                }
+            },
+        });
+    </script>
+</body>
+
+</html>

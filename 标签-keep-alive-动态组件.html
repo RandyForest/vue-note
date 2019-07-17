@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+
+<body>
+    <div id="app">
+        <button @click="changeComp1">My Comp1</button>
+        <button @click="changeComp2">My Comp2</button>
+        <p>这个框中的文本在切换标签后会丢失</p>
+        <component :is="componentId"></component>
+        <p>这个框中的文本在切换标签后不会会丢失</p>
+        <keep-alive>
+            <component :is="componentId"></component>
+        </keep-alive>
+    </div>
+
+    <!-- 定义模板1 -->
+    <template id="my-templ1">
+        <div>
+            <p>my-templ1</p>
+            <input type="text">
+        </div>
+    </template>
+
+    <!-- 定义模板2 -->
+    <template id="my-templ2">
+        <div>
+            <p>my-templ2</p>
+            <input type="text">
+        </div>
+    </template>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data() {
+                return {
+                    componentId: "my-comp1"
+                }
+            },
+            components: {
+                'my-comp1': {
+                    template: '#my-templ1',
+                },
+                'my-comp2': {
+                    template: '#my-templ2',
+                }
+            },
+            methods: {
+                changeComp1: function () {
+                    this.componentId = "my-comp1";
+                },
+                changeComp2: function () {
+                    this.componentId = "my-comp2";
+                }
+            },
+        });
+    </script>
+</body>
+
+</html>

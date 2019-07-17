@@ -11,22 +11,115 @@
 </head>
 
 <body>
+    <!-- slot 插槽 -->
+    <div id="app">
+        <!-- 如果不适用插槽，标签中的内容不会显示 -->
+        <p-template>#这是html中的文本#</p-template>
+        <p-template2></p-template2>
+        <p-template2>#如果在页面中输入了值，就会覆盖掉模板中的默认值#</p-template2>
+    </div>
 
+    <script>
+        new Vue({
+            el: "#app",
+            components: {
+                'p-template': {
+                    // <slot> 放于希望在html中插入的位置
+                    template: `<p>#这是模板定义中的文本#<slot></slot></p>`
+                },
+                'p-template2': {
+                    // <slot> 放于希望在html中插入的位置
+                    template: `<p>#这是模板定义中的文本#<slot>#默认值#</slot></p>`
+                }
+            }
+        })
+    </script>
 
-<div id="app">
-    
-</div>
+    <hr>
 
-<script>
-    new Vue({
-        el: "#app",
-        components:{
-            
-            template:`<p>这是模板内的内容<slot></slot></p>`
-        }
-});
-</script>
+    <!--
+        具名插槽
+        v-slot 只能用于 <template> 标签
+    -->
+    <div id="app2">
+        <my-tag>
+            <!-- 使用 v-slot 指令插入到指定的插槽名中 -->
+            <template v-slot:my-header>
+                <h1>这里是 my-header</h1>
+            </template>
 
+            <template v-slot:default>
+                <p>这里是 default</p>
+            </template>
+
+            <template v-slot:my-footer>
+                <p>这里是 my-footer</p>
+            </template>
+        </my-tag>
+    </div>
+
+    <!-- 定义模板 -->
+    <template id="my-templ">
+        <div class="container">
+            <slot name="my-header"></slot>
+            <!-- 默认插槽名是 default 也可以不定义 -->
+            <slot name="default"></slot>
+            <slot name="my-footer"></slot>
+        </div>
+    </template>
+
+    <!-- 定义组件 -->
+    <script>
+        new Vue({
+            el: '#app2',
+            components: {
+                'my-tag': {
+                    template: `#my-templ`
+                }
+            }
+        });
+    </script>
+
+    <hr>
+
+    <!-- 把插槽中定义的数据传出组件 -->
+    <div id="app3">
+        <!--
+            利用 v-slot:插槽名="变量名" 接收数据
+            变量名不需要与模板定义中的一样
+            不同插槽有不同作用域，所以变量名可以重复
+        -->
+        <p-template3 v-slot:default="obj">{{obj.oo1.mmm}}</p-template3>
+        <p-template3 v-slot:message="obj">{{obj.mm1}}</p-template3>
+    </div>
+
+    <!-- 定义模板 -->
+    <template id="my-templ3">
+        <!-- 定义一个变量 oo1 把 oo 传到外部 -->
+        <p>
+            <slot name="default" v-bind:oo1="oo"></slot>
+            <slot name="message" v-bind:mm1="mm"></slot>
+        </p>
+    </template>
+
+    <script>
+        var vm = new Vue({
+            el: "#app3",
+            components: {
+                'p-template3': {
+                    data() {
+                        return {
+                            oo: {
+                                mmm: "这是 oo.mmm 中的信息"
+                            },
+                            mm: "这是 mm 中的信息"
+                        }
+                    },
+                    template: '#my-templ3'
+                }
+            }
+        })
+    </script>
 
 
 </body>

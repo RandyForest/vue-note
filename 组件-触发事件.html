@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>组件-自定义事件</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+
+<body>
+    <!--
+        自定义事件用于把模板内部的事件传递给外部处理
+        使用： <自定义标签 v-on:自定义事件="方法">
+    -->
+    <div id="app">
+        <wel-button v-on:welcome="sayHi"></wel-button>
+    </div>
+
+    <!-- 定义： <标签 v-on:原生事件="$emit('自定义事件名')"> -->
+    <script>
+        Vue.component('wel-button', {
+            template: `<button v-on:click="$emit('welcome')">点击</button>`
+        })
+
+        new Vue({
+            el: '#app',
+            methods: {
+                sayHi: function () {
+                    alert('Hi!')
+                }
+            }
+        })
+    </script>
+
+    <hr>
+
+    <div id="app2">
+        <!-- 将外部定义的 sayHi 方法通过 welcome 传入组件内 -->
+        <wel-button v-on:welcome="sayHi"></wel-button>
+    </div>
+
+    <!-- 在方法中定义 -->
+    <script>
+        Vue.component('wel-button', {
+            // 如果触发了点击事件就调用模板内部定义的 customEvent 方法
+            template: `<button v-on:click="customEvent">点击</button>`,
+            methods: {
+                customEvent: function () {
+                    // 通过 welcome 调用外部接收到的 sayHi 方法
+                    this.$emit('welcome');
+                }
+            }
+        })
+
+        new Vue({
+            el: '#app2',
+            methods: {
+                sayHi: function () {
+                    alert('Hi!')
+                }
+            }
+        })
+    </script>
+
+    <hr>
+
+    <!-- 在事件中传参 -->
+    <div id="app3">
+        <my-tag v-on:give-temp-arg="showArg"></my-tag>
+    </div>
+
+    <script>
+        Vue.component('my-tag', {
+            data: function () {
+                return {
+                    tempArg: "模板中定义的参数"
+                }
+            },
+            methods: {
+                giveTempAdvice: function () {
+                    // 传出给html，等价于 外部定义的方法(this.tempArg)
+                    // 使用：   this.$emit(事件名,事件参数)
+                    this.$emit('give-temp-arg', this.tempArg);
+                }
+            },
+            template: `<button v-on:click="giveTempAdvice">点击</button>`
+        })
+
+        new Vue({
+            el: '#app3',
+            methods: {
+                // 被组件内部的 $emit() 调用
+                showArg: function (arg) {
+                    alert("外部HTML定义的方法：" + arg)
+                }
+            }
+        })
+
+    </script>
+
+
+</body>
+
+</html>

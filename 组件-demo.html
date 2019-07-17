@@ -10,7 +10,22 @@
 </head>
 
 <body>
-    <!-- 组件 -->
+    <!-- 定义模板 -->
+    <template id="teble-templ">
+        <table :border="border">
+            <tr v-if="hasTh">
+                <th></th>
+                <th></th>
+            </tr>
+            <tr v-for="">
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+    </template>
+
+
+    <!-- 定义组件 -->
     <script>
         Vue.component('table-r', {
             props: {
@@ -27,25 +42,16 @@
                     default: 2
                 }
             },
-            template: '\
-                <table :border="border">\
-                    <tr v-if="hasTh">\
-                        <th></th>\
-                        <th></th>\
-                    </tr>\
-                    <tr v-for="" >\
-                        <td></td>\
-                        <td></td>\
-                    </tr >\
-                </table >\
-        '
+            template: 'teble-templ'
         })
     </script>
+
 
     <!-- 用例 -->
     <div id="app">
         <table-r :border="1" :col="3" :has-th="true">aaaa</table-r>
     </div>
+
     <script>
         new Vue({
             el: "#app"

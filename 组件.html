@@ -9,6 +9,10 @@
     <script src="./lib/vue.js"></script>
 </head>
 
+<!--
+    组件中的data字段需要用方法返回，不然会使用一个data对象
+    如：    data:function(){return {data数据的键值对}}
+-->
 <body>
     <!-- 
         test1
@@ -143,26 +147,6 @@
                         title: this.newTodoText
                     })
                     this.newTodoText = ''
-                }
-            }
-        })
-    </script>
-
-    <hr>
-
-    <!-- slot 插槽 -->
-    <div id="app5">
-        <!-- 如果不适用插槽，标签中的内容不会显示 -->
-        <p-template>#这是html中的文本#</p-template>
-    </div>
-
-    <script>
-        var vm = new Vue({
-            el: "#app5",
-            components:{
-                'p-template':{
-                    // <slot> 放于希望在html中插入的位置
-                    template:`<p>#这是模板定义中的文本#<slot></slot></p>`
                 }
             }
         })
