@@ -43,7 +43,7 @@
             url: 'http://www.baidu.com/',
             body: {},
             headers: {
-                'Access-Control-Allow-Origin': 'http://www.baidu.com/'
+                'Access-Control-Allow-Origin': '*'
             },
             method: {},
             params: {},
@@ -54,6 +54,7 @@
             before: function (Request) { },
             progress: function (Event) { }
         }
+
         new Vue({
             el: '#app',
             methods: {
@@ -61,6 +62,11 @@
                     // 语法：   this.$http.请求方法(请求内容)
                     //          上句获得的对象.then(成功后的方法,失败后的方法)
                     this.$http.get('http://www.baidu.com/').then((response) => {
+                        this.movie = response.data;
+                        console.log(this.movie);
+                        let that = this.$router;
+                        console.log(that);
+
                         console.log(response);
                     }, (response) => { // 失败后执行
                         console.log(response);
@@ -68,6 +74,10 @@
                 },
                 getInfo2() {
                     this.$http.get('http://www.baidu.com/', request).then((response) => {
+                        this.movie = response.data;
+                        console.log(this.movie);
+                        let that = this.$router;
+                        console.log(that);
                         console.log(response);
                     }, (response) => {
                         console.log(response);

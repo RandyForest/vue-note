@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+
+</head>
+<!--
+    ref 可以替代使用 js 操作元素
+-->
+<body>
+    <div id="app">
+        <!-- 在元素中定义 ref 的对象名 reference -->
+        <input type="text" ref="reference">
+        <button @click="onClick">点击</button>
+    </div>
+
+    <script>
+        var vm=new Vue({
+            el: "#app",
+            methods: {
+                onClick: function () {
+                    // 使用：   this.$refs.标签中定义的对象名
+                    // 此句可以访问到在html中定义的 reference 对象
+                    alert(this.$refs.reference.value);
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>
