@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+</head>
+
+<!--
+    方法一：在查询 `query` 中指定键值对，也就是url中问号 ? 后的键值对
+    方法二：在参数中 `params` 定义键与值
+-->
+
+<body>
+    <!-- 在url 中直接给出键值对 -->
+    <div id="app">
+        <router-link to="/">router</router-link>
+        <p>
+            <!-- 定义一个参数 键：aaa   值：bbb -->
+            <router-link to="/route-com1?aaa=bbb">Go to route-com1</router-link>
+        </p>
+
+        <!-- 在此显示匹配路径的组件 -->
+        <router-view></router-view>
+    </div>
+
+    <script>
+        // 组件1
+        var routeCom1 = Vue.component('route-com1', {
+            template: `<p>I am route-com1. Have a query is {{msg}}</p>`,
+            data:function(){
+                return {
+                    msg:null
+                }
+            },
+            created:function(){
+                console.log(this.$route);
+                // 获取键 aaa 的值，并赋值给 msg 变量
+                // 使用 this.$route.query.键
+                this.msg=this.$route.query.aaa;
+                
+            }
+        });
+
+
+        // 定义路由器
+        var myRouter = new VueRouter({
+            routes: [
+                { path: '/route-com1', component: routeCom1 },
+            ]
+        })
+
+        new Vue({
+            el: '#app',
+            data: function(){
+                return {
+
+                }
+            },
+            // 使用 router 属性定义
+            router: myRouter
+        })
+
+    </script>
+
+<hr>
+
+<!-- 在模板中配合定义参数 -->
+<div id="app2">
+        <router-link to="/">router</router-link>
+        <p>
+            <!-- 定义一个参数 值：bbb -->
+            <router-link to="/route-com1/bbb">Go to route-com1</router-link>
+        </p>
+
+        <!-- 在此显示匹配路径的组件 -->
+        <router-view></router-view>
+    </div>
+
+    <script>
+        // 组件1
+        var routeCom1 = Vue.component('route-com1', {
+            template: `<p>I am route-com1. Have a query is {{msg}}</p>`,
+            data:function(){
+                return {
+                    msg:null
+                }
+            },
+            created:function(){
+                console.log(this.$route);
+                // 获取键 aaa 的值，并赋值给 msg 变量
+                // 使用 this.$route.params.键
+                this.msg=this.$route.params.aaa;
+                
+            }
+        });
+
+
+        // 定义路由器
+        var myRouter = new VueRouter({
+            routes: [
+                // 定义了一个用于接收值的键：aaa  
+                { path: '/route-com1/:aaa', component: routeCom1 },
+            ]
+        })
+
+        new Vue({
+            el: '#app2',
+            data: function(){
+                return {
+
+                }
+            },
+            // 使用 router 属性定义
+            router: myRouter
+        })
+
+    </script>
+
+</body>
+
+</html>
