@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
@@ -7,25 +8,27 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/3.0.7/vue-router.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.5.1/vue-resource.js"></script>
 </head>
+
 <body>
     <div id="app">
         <button @click="get">点击</button>
     </div>
-    
+
     <script>
         new Vue({
             el: '#app',
             methods: {
-                get:function(){
+                get: function () {
                     this.$http.get('http://localhost:5500/').then(function (res) {
                         console.log(res);
                         document.write(res.body);
-                    },function(res){
+                    }, function (res) {
                         console.log(res);
                     })
                 }
             },
-    });
+        });
     </script>
 </body>
+
 </html>
