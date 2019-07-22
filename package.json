@@ -1,0 +1,30 @@
+{
+  "name": "vue-note",
+  "version": "1.0.0",
+  "description": "vue.js笔记",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RandyForest/vue-note.git"
+  },
+  "author": "randy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RandyForest/vue-note/issues"
+  },
+  "homepage": "https://github.com/RandyForest/vue-note#readme",
+  "dependencies": {
+    "vue": "^2.6.10"
+  },
+  "devDependencies": {
+    "@angular-devkit/core": "^8.1.2",
+    "webpack": "^4.36.1",
+    "webpack-cli": "^3.3.6"
+  }
+}
