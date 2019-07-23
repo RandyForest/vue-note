@@ -10,51 +10,116 @@
 </head>
 
 <body>
+    <style>
+        table {
+            border-style: solid;
+        }
+
+        tr {
+            min-height: 100px;
+        }
+
+        th,
+        td {
+            min-width: 100px;
+            min-height: 100px;
+        }
+    </style>
+
     <!-- 定义模板 -->
     <template id="teble-templ">
-        <table :border="border">
-            <tr v-if="hasTh">
-                <th></th>
-                <th></th>
-            </tr>
-            <tr v-for="">
-                <td></td>
-                <td></td>
-            </tr>
+        <table>
+            <template v-if="list!=null">
+                <tr v-if="hasTh">
+                    <th v-for="(arr,key) in list[0]" :key="key">{{key}}</th>
+                </tr>
+                <tr v-for="(arr,key) in list" :key="key">
+                    <td v-for="(item,index) in arr" :key="index">{{item}}</td>
+                </tr>
+            </template>
+            <template v-if="list==null">
+                <tr v-for="(item, index) in rowList" :key="index">
+                    <td v-for="(item, index) in colList" :key="index">{{item}}</td>
+                </tr>
+            </template>
         </table>
     </template>
 
 
     <!-- 定义组件 -->
     <script>
-        Vue.component('table-r', {
+        Vue.component('table-comp', {
+            template: '#teble-templ',
             props: {
-                border: {
-                    type: Number,
-                    default: 1
+                list: {
+                    type: Array
                 },
                 hasTh: {
                     type: Boolean,
                     default: true
                 },
+                row: {
+                    type: Number,
+                    default: 2
+                },
                 col: {
                     type: Number,
                     default: 2
+                },
+            },
+            computed: {
+                rowNum: function () {
+                    if (this.row < 0) {
+                        return 0;
+                    }
+
+                    var rowNum = parseInt(this.row);
+                    return rowNum;
+                },
+                rowList: function () {
+                    var list = [];
+                    for (let i = 0; i < this.rowNum; i++) {
+                        list[i] = null;
+                    }
+                    return list;
+                },
+                colNum: function () {
+                    if (this.col < 0) {
+                        return 0;
+                    }
+
+                    let colNum = parseInt(this.col);
+                    return colNum;
+                },
+                colList: function () {
+                    let list = [];
+                    for (let i = 0; i < this.colNum; i++) {
+                        list[i] = null;
+                    }
+                    return list;
                 }
             },
-            template: 'teble-templ'
         })
     </script>
 
 
     <!-- 用例 -->
     <div id="app">
-        <table-r :border="1" :col="3" :has-th="true">aaaa</table-r>
+        <table-comp :col="5" :row="4" :has-th="true"></table-comp>
+        <table-comp :has-th="true" :list="list"></table-comp>
     </div>
 
     <script>
         new Vue({
-            el: "#app"
+            el: "#app",
+            data() {
+                return {
+                    list: [
+                        [3, 2, 3],
+                        [3, 2, 1]
+                    ]
+                }
+            },
         })
     </script>
 
