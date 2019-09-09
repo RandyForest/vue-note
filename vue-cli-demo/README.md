@@ -1,4 +1,4 @@
-# demo
+# vue-cli-demo
 
 ## Project setup
 ```

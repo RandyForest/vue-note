@@ -14,7 +14,7 @@
     <!-- slot 插槽 -->
     <div id="app">
         <!-- 如果不适用插槽，标签中的内容不会显示 -->
-        <p-template>#这是html中的文本#</p-template>
+        <p-template>【这是html中的文本】</p-template>
         <p-template2></p-template2>
         <p-template2>#如果在页面中输入了值，就会覆盖掉模板中的默认值#</p-template2>
     </div>
@@ -25,11 +25,11 @@
             components: {
                 'p-template': {
                     // <slot> 放于希望在html中插入的位置
-                    template: `<p>#这是模板定义中的文本#<slot></slot></p>`
+                    template: `<p>【这是模板定义中的文本】<slot></slot></p>`
                 },
                 'p-template2': {
                     // <slot> 放于希望在html中插入的位置
-                    template: `<p>#这是模板定义中的文本#<slot>#默认值#</slot></p>`
+                    template: `<p>【这是模板定义中的文本】<slot>【默认值】</slot></p>`
                 }
             }
         })
@@ -40,12 +40,13 @@
     <!--
         具名插槽
         v-slot 只能用于 <template> 标签
+        定义插槽名用烤串命名法
     -->
     <div id="app2">
         <my-tag>
             <!-- 使用 v-slot 指令插入到指定的插槽名中 -->
             <template v-slot:my-header>
-                <h1>这里是 my-header</h1>
+                <p>这里是 my-header</p>
             </template>
 
             <template v-slot:default>
